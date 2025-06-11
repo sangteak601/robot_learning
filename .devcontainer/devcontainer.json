@@ -1,0 +1,46 @@
+{
+    "name": "Development Container",
+    "privileged": true,
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "workspaceFolder": "/home/ws",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions":[
+				"ms-python.python",
+				"eamodio.gitlens",
+				"shardulm94.trailing-spaces",
+				"ms-azuretools.vscode-docker",
+				"redhat.vscode-yaml",
+				"smilerobotics.urdf",
+				"streetsidesoftware.code-spell-checker",
+				"yzhang.markdown-all-in-one"
+			]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}",
+        "ACCEPT_EULA": "Y",
+        "OMNI_KIT_ALLOW_ROOT": "1"
+    },
+    "runArgs": [
+        "--net=host",
+        "--pid=host",
+        "--ipc=host",
+        "--gpus", "all",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/cache/kit:/isaac-sim/kit/cache:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/cache/ov:/root/.cache/ov:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/cache/pip:/root/.cache/pip:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/cache/glcache:/root/.cache/nvidia/GLCache:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/cache/computecache:/root/.nv/ComputeCache:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/logs:/root/.nvidia-omniverse/logs:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/data:/root/.local/share/ov/data:rw",
+        "-v", "/home/${localEnv:USERNAME}/docker/isaac-sim/documents:/root/Documents:rw"
+    ],
+    "mounts": [
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
+        "source=/dev/,target=/dev/,type=bind"
+    ],
+}

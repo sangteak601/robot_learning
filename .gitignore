@@ -1,0 +1,8 @@
+# Python
+__pycache__
+
+# Issac Sim
+.thumbs
+
+# Data
+*.pkl
